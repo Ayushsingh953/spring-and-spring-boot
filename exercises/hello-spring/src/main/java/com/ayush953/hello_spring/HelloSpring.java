@@ -2,6 +2,8 @@ package com.ayush953.hello_spring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Arrays;
+
 public class HelloSpring {
     public static void main(String[] args) {
         // Configure things that we want spring to manage : @Configuration class
@@ -17,6 +19,10 @@ public class HelloSpring {
         System.out.println(context.getBean("person"));
         System.out.println(context.getBean("person2"));
         System.out.println(context.getBean("person3"));
-//        System.out.println(context.getBean(Address.class));
+        System.out.println(context.getBean("person4"));
+        System.out.println(context.getBean(Address.class));
+
+        // get all beans managed by spring
+        Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
     }
 }
