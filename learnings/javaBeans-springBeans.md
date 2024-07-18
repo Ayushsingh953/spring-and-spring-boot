@@ -41,3 +41,4 @@ POJO pojo = new POJO();
 
 ## Spring Bean :
 Any java object that is managed by Spring 
+1. Spring uses IOC( Inversion of Control) container (Bean Factory or Application context) to manage these objects
