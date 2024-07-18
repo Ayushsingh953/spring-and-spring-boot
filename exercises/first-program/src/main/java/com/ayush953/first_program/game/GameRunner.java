@@ -1,8 +1,9 @@
 package com.ayush953.first_program.game;
 
 public class GameRunner {
-    Mario game;
-    public GameRunner(Mario game){
+//    Mario game;
+    SuperContra game;
+    public GameRunner(SuperContra game){
         this.game = game;
     }
     public void run(){
