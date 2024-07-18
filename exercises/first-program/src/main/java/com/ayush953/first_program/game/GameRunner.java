@@ -2,8 +2,9 @@ package com.ayush953.first_program.game;
 
 public class GameRunner {
 //    Mario game;
-    SuperContra game;
-    public GameRunner(SuperContra game){
+//    SuperContra game;
+    GamingConsole game;
+    public GameRunner(GamingConsole game){
         this.game = game;
     }
     public void run(){

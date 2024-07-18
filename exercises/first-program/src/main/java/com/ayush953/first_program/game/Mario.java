@@ -1,6 +1,6 @@
 package com.ayush953.first_program.game;
 
-public class Mario {
+public class Mario implements GamingConsole{
     public void up(){
         System.out.println("Mario up");
     }
