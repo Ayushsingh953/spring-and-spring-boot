@@ -1,5 +1,8 @@
 package com.ayush953.first_program.game;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GameRunner {
 //    Mario game;
 //    SuperContra game;
