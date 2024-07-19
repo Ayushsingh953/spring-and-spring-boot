@@ -51,7 +51,7 @@ public class DependencyInjectionExample {
     }
 }
 ```
-1. We have main class which is set as a configuration class, and it will scan for the beans in the same package using component scan tag.
+1. We have main class which is set as a configuration class, and it will scan for the beans in the same package using component scan anootation.
 2. It will launch the spring context.
 3. It will also print all the beans available in this spring context.
 
@@ -69,7 +69,7 @@ dependency2
 exampleClass
 ```
 the reason its giving both dependency as null because we haven't configured spring to wire dependency1 and dependency2 to example class.
-We can do that by adding **@Autowired** tag to both our dependencies(field injection) as : 
+We can do that by adding **@Autowired** annotation to both our dependencies(field injection) as : 
 ## Field Injection
 ```java
 @Component
