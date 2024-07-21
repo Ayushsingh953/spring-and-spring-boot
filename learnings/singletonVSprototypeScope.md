@@ -27,9 +27,9 @@ class PrototypeClass{
 
 @Configuration
 @ComponentScan
-public class BusinessSpring {
+public class SingletonPrototypeSpring {
     public static void main(String[] args) {
-        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BusinessSpring.class)) {
+        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SingletonPrototypeSpring.class)) {
             System.out.println(context.getBean(NormalClass.class));
             System.out.println(context.getBean(NormalClass.class));
             System.out.println(context.getBean(NormalClass.class));
@@ -54,7 +54,7 @@ com.ayush953.exercise_1.PrototypeClass@5d7148e2
 
 Process finished with exit code 0
 ```
-* the reason is because each time we ask the context for the new bean of the prototype class it will create new object instance and return it but for the normal class it will return the same object instance.
+* the reason is that each time we ask the context for the new bean of the prototype class it will create new object instance and return it but for the normal class it will return the same object instance.
 
 ## Prototype vs Singleton Bean Scope
 <table>
