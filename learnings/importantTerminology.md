@@ -45,3 +45,19 @@
     2. Instantiating Beans for 3rd-party libraries: @Bean</th>
 </tr>
 </table>
+
+# Evolution of Jakarta EE vs J2EE vs JAVA EE
+* Enterprise capabilities were initially built into **JDK**.
+* With time, they were separated out:
+  * **J2EE** - Java 2 Platform enterprise edition.
+  * **Java EE** - Java platform enterprise edition (Rebranding).
+  * **Jakarta EE** - oracle gave Java EE rights to the Eclipse foundation.
+    * **Important Specifications** :
+      * Jakarta Server pages(JSP) - used to create views in web application.
+      * Jakarta Standard tag library(JSTL) - used to show dynamic information.
+      * Jakarta Enterprise Beans(EJB)
+      * Jakarta RESTful Web Services(JAX-RS) - build RESTful APIs.
+      * Jakarta Bean validation
+      * Jakarta Contexts and Dependency Injection(CDI)
+      * Jakarta Persistence API(JPA) - interact with relational databases.
+    * Supported by Spring 6 and Spring boot 3
