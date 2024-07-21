@@ -19,9 +19,9 @@ class B{
 }
 @Configuration
 @ComponentScan
-public class BusinessSpring {
+public class LazyInitializationSpring {
     public static void main(String[] args) {
-        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BusinessSpring.class)) {
+        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LazyInitializationSpring.class)) {
         }
     }
 }
@@ -75,9 +75,9 @@ class B{
 
 @Configuration
 @ComponentScan
-public class BusinessSpring {
+public class LazyInitializationSpring {
     public static void main(String[] args) {
-        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BusinessSpring.class)) {
+        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LazyInitializationSpring.class)) {
             context.getBean(B.class).display();
         }
     }
