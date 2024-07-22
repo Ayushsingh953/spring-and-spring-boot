@@ -69,3 +69,27 @@ levels of logging -
 * warning
 * error
 * off
+
+## using different profiles for development or production environment
+By default, the application uses application.properties, but we can configure different profiles based on our environment.
+
+Let's create dev and prod profiles - application-dev.properties and application-prod.properties
+
+**application-dev.properties**
+```properties
+logging.level.org.springframework=trace
+```
+**application-prod.properties**
+```properties
+logging.level.org.springframework=info
+```
+
+Tell **application.properties** which profile to use :
+
+**application.properties**
+```properties
+spring.application.name=hello-spring-boot
+logging.level.org.springframework=debug
+spring.profiles.active=dev
+```
+For now, we are only using different logging levels, but we can do a lot more.
