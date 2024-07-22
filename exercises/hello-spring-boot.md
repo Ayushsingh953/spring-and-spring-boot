@@ -56,3 +56,16 @@ public class Course {
 }
 ```
 there isn't much to explain in this class. it has a constructor and getter methods only and few variables which is used by CourseController class to retrieve the courses.
+
+## We can change the logging level of our application to get more information 
+we can do this in application.properties file
+```properties
+logging.level.org.springframework="DEBUG"
+```
+levels of logging - 
+* trace
+* debug
+* info
+* warning
+* error
+* off
