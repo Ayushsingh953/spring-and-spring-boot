@@ -93,3 +93,77 @@ logging.level.org.springframework=debug
 spring.profiles.active=dev
 ```
 For now, we are only using different logging levels, but we can do a lot more.
+
+We can set different configuration properties in our application.properties file as :
+```properties
+currency-service.url=default.ayush953.com
+currency-service.username=defaultUsername
+currency-service.key=default
+```
+Now we can define configuration class which handles all our configuration properties in one place.
+```java
+package com.ayush953.hello_spring_boot;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@ConfigurationProperties(prefix = "currency-service")
+@Component
+public class CurrencyServiceConfiguration {
+    private String url;
+    private String username;
+    private String key;
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getKey() {
+        return key;
+    }
+}
+```
+we should use the same prefix and fields which we have in our application.properties, and it will get mapped to the values present in properties file.
+
+To test we will now create one controller which retrieves our configuration properties.
+```java
+package com.ayush953.hello_spring_boot;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CurrencyServiceController {
+    @Autowired
+    CurrencyServiceConfiguration configuration;
+
+    @RequestMapping("/currency-configuration")
+    public CurrencyServiceConfiguration getCurrencyServiceConfiguration() {
+        return configuration;
+    }
+}
+```
+when we request the endpoint it will give us the values present in application.properties file.
+```json
+{
+  "url": "default.ayush953.com",
+  "username": "defaultUsername",
+  "key": "default"
+}
+```
