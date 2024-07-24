@@ -95,6 +95,8 @@ spring.profiles.active=dev
 For now, we are only using different logging levels, but we can do a lot more.
 
 We can set different configuration properties in our application.properties file as :
+
+**application.properties**
 ```properties
 currency-service.url=default.ayush953.com
 currency-service.username=defaultUsername
@@ -165,5 +167,21 @@ when we request the endpoint it will give us the values present in application.p
   "url": "default.ayush953.com",
   "username": "defaultUsername",
   "key": "default"
+}
+```
+We can override the default configuration properties by defining the properties for each environment.
+
+**application-dev.properties**
+```properties
+currency-service.url=dev.ayush953.com
+currency-service.username=devUsername
+currency-service.key=dev
+```
+Since we are still using the dev profile it will give dev profile values.
+```json
+{
+  "url": "dev.ayush953.com",
+  "username": "devUsername",
+  "key": "dev"
 }
 ```
