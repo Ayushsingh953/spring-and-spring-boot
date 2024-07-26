@@ -60,7 +60,7 @@ public class CourseJdbcRepository {
 ```
 this class uses JDBC template to perform insert query.Now we need to run this when our application starts up. We can use CommandLineRunner interface to run something when the application starts.
 
-**CourseJdbcCommandLineRunner.java**
+**CourseCommandLineRunner.java**
 ```java
 package com.ayush953.Jpa_and_Hibernate.course.Jdbc;
 
@@ -68,11 +68,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+public class CourseCommandLineRunner implements CommandLineRunner {
 
     CourseJdbcRepository repository;
 
-    public CourseJdbcCommandLineRunner(CourseJdbcRepository repository) {
+    public CourseCommandLineRunner(CourseJdbcRepository repository) {
         this.repository = repository;
     }
     @Override
@@ -122,7 +122,7 @@ Modify **CourseJdbcRepository.java** class :
     }
 ```
 And then while inserting new data we can pass Course object as an argument.
-Modified **CourseJdbcCommandLineRunner.java** class :
+Modified **CourseCommandLineRunner.java** class :
 ```java
  @Override
     public void run(String... args) throws Exception {
@@ -142,7 +142,7 @@ private static String DELETE_QUERY = """
         jdbcTemplate.update(DELETE_QUERY, id);
     }
 ```
-**CourseJdbcCommandLineRunner.java** :
+**CourseCommandLineRunner.java** :
 ```java
 repository.deleteById(1);
 ```
@@ -206,7 +206,7 @@ public class Course {
 ```
 Print the courses
 
-**CourseJdbcCommandLineRunner.java** :
+**CourseCommandLineRunner.java** :
 ```java
 System.out.println(repository.selectById(2));
 System.out.println(repository.selectById(3));

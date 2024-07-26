@@ -1,15 +1,15 @@
-package com.ayush953.Jpa_and_Hibernate.course.Jdbc;
+package com.ayush953.Jpa_and_Hibernate.course;
 
-import com.ayush953.Jpa_and_Hibernate.course.Course;
+import com.ayush953.Jpa_and_Hibernate.course.Jdbc.CourseJdbcRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+public class CourseCommandLineRunner implements CommandLineRunner {
 
     CourseJdbcRepository repository;
 
-    public CourseJdbcCommandLineRunner(CourseJdbcRepository repository) {
+    public CourseCommandLineRunner(CourseJdbcRepository repository) {
         this.repository = repository;
     }
     @Override
