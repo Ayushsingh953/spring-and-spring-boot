@@ -293,3 +293,73 @@ We will get the same output as before.
 Course [ id = 2, name = Spring boot, author = XYZ ]
 Course [ id = 3, name = Apache kafka, author = XYZ ]
 ```
+
+### 5
+Now We will use Spring Data JPA. the advantage of using Spring Data JPA is that we don't need to implement entity manager. We only need to map our Course class to the course table and define an interface which extends JPARepository and Spring Data JPA will take care of rest of the things.
+#### map Course class to course table
+Same as Before
+```java
+@Entity
+public class Course {
+    @Id
+    private long id;
+    
+    @Column(name="name")
+    private String name;
+    
+    @Column(name="author")
+    private String author;
+
+    public Course() {
+
+    }
+    //.....
+}
+```
+#### Define interface
+**CourseSpringDataJpaRepository.interface** 
+```java
+package com.ayush953.Jpa_and_Hibernate.course.SpringDataJpa;
+
+import com.ayush953.Jpa_and_Hibernate.course.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CourseSpringDataJpaRepository extends JpaRepository<Course,Long> {
+}
+```
+Use this interface to perform operations :
+
+**CourseCommandLineRunner.java** class :
+```java
+@Component
+public class CourseCommandLineRunner implements CommandLineRunner {
+
+    //CourseJdbcRepository repository;
+
+    /* public CourseCommandLineRunner(CourseJdbcRepository repository) {
+        this.repository = repository;
+    } */
+
+    /* CourseJpaRepository repository;
+    public CourseCommandLineRunner(CourseJpaRepository repository) {
+        this.repository = repository;
+    } */
+
+    CourseSpringDataJpaRepository repository;
+    public CourseCommandLineRunner(CourseSpringDataJpaRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        repository.save(new Course(1,"Docker","XYZ"));
+        repository.save(new Course(2,"Spring boot","XYZ"));
+        repository.save(new Course(3,"Apache kafka","XYZ"));
+
+        repository.deleteById(1L);
+
+        System.out.println(repository.findById(2L));
+        System.out.println(repository.findById(3L));
+    }
+}
+```

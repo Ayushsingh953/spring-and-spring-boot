@@ -2,6 +2,7 @@ package com.ayush953.Jpa_and_Hibernate.course;
 
 import com.ayush953.Jpa_and_Hibernate.course.Jdbc.CourseJdbcRepository;
 import com.ayush953.Jpa_and_Hibernate.course.Jpa.CourseJpaRepository;
+import com.ayush953.Jpa_and_Hibernate.course.SpringDataJpa.CourseSpringDataJpaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,20 +15,25 @@ public class CourseCommandLineRunner implements CommandLineRunner {
         this.repository = repository;
     } */
 
-    CourseJpaRepository repository;
+    /* CourseJpaRepository repository;
     public CourseCommandLineRunner(CourseJpaRepository repository) {
+        this.repository = repository;
+    } */
+
+    CourseSpringDataJpaRepository repository;
+    public CourseCommandLineRunner(CourseSpringDataJpaRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        repository.insert(new Course(1,"Docker","XYZ"));
-        repository.insert(new Course(2,"Spring boot","XYZ"));
-        repository.insert(new Course(3,"Apache kafka","XYZ"));
+        repository.save(new Course(1,"Docker","XYZ"));
+        repository.save(new Course(2,"Spring boot","XYZ"));
+        repository.save(new Course(3,"Apache kafka","XYZ"));
 
-        repository.deleteById(1);
+        repository.deleteById(1L);
 
-        System.out.println(repository.selectById(2));
-        System.out.println(repository.selectById(3));
+        System.out.println(repository.findById(2L));
+        System.out.println(repository.findById(3L));
     }
 }
