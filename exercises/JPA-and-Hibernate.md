@@ -240,7 +240,9 @@ public class Course {
 }
 ```
 Rest of the Code will be same. 
+
 **@Entity** - This annotation indicates that instances of this class will be mapped to a corresponding table in the database. If we want to map to different table then we can pass the name as **@Entity(name="")** .
+
 **@Id** - This annotation marks the field id as the primary key of the entity.
 
 We can remove the @Column annotation if the names are same in the class as well as in the table.
@@ -295,7 +297,9 @@ Course [ id = 3, name = Apache kafka, author = XYZ ]
 ```
 
 ### 5
-Now We will use Spring Data JPA. the advantage of using Spring Data JPA is that we don't need to implement entity manager. We only need to map our Course class to the course table and define an interface which extends JPARepository and Spring Data JPA will take care of rest of the things.
+Now We will use Spring Data JPA.
+
+the advantage of using Spring Data JPA is that we don't need to implement entity manager. We only need to map our Course class to the course table and define an interface which extends JPARepository and Spring Data JPA will take care of rest of the things.
 #### map Course class to course table
 Same as Before
 ```java
