@@ -81,3 +81,68 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
     }
 }
 ```
+Let's add course using Course class.
+```java
+package com.ayush953.Jpa_and_Hibernate.course;
+
+public class Course {
+    private long id;
+    private String name;
+    private String author;
+
+    public Course() {
+
+    }
+    public Course(long id, String name, String author) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getAuthor() {
+        return author;
+    }
+}
+```
+We can use this class to insert data into database.
+Modify **CourseJdbcRepository.java** class : 
+```java
+ private static String INSERT_QUERY = """
+            INSERT INTO COURSE(id,name,author) VALUES (?,?,?);
+            """;
+
+    public void insert(Course course) {
+        jdbcTemplate.update(INSERT_QUERY, course.getId(), course.getName(), course.getAuthor());
+    }
+```
+And then while inserting new data we can pass Course object as an argument.
+Modified **CourseJdbcCommandLineRunner.java** class :
+```java
+ @Override
+    public void run(String... args) throws Exception {
+        repository.insert(new Course(1,"Docker","XYZ"));
+        repository.insert(new Course(2,"Spring boot","XYZ"));
+        repository.insert(new Course(3,"Apache kafka","XYZ"));
+
+    }
+```
+#### To delete row by id : 
+**CourseJdbcRepository.java** :
+```java
+private static String DELETE_QUERY = """
+            DELETE FROM COURSE WHERE id = ?;
+        """;
+ public void deleteById(long id) {
+        jdbcTemplate.update(DELETE_QUERY, id);
+    }
+```
+**CourseJdbcCommandLineRunner.java** :
+```java
+repository.deleteById(1);
+```
