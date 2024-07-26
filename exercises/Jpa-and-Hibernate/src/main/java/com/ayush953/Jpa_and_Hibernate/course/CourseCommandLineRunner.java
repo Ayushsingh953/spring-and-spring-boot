@@ -29,11 +29,15 @@ public class CourseCommandLineRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         repository.save(new Course(1,"Docker","XYZ"));
         repository.save(new Course(2,"Spring boot","XYZ"));
-        repository.save(new Course(3,"Apache kafka","XYZ"));
+        repository.save(new Course(3,"Apache kafka","ABC"));
 
         repository.deleteById(1L);
 
+        System.out.println("Courses by id :");
         System.out.println(repository.findById(2L));
         System.out.println(repository.findById(3L));
+
+        System.out.println("Courses by author :");
+        System.out.println(repository.findByAuthor("ABC"));
     }
 }

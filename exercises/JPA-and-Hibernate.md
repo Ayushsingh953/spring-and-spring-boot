@@ -363,3 +363,23 @@ public class CourseCommandLineRunner implements CommandLineRunner {
     }
 }
 ```
+
+#### We can also define our custom method in the interface to perform specific operation :
+**CourseSpringDataJpaRepository.interface** :
+```java
+public interface CourseSpringDataJpaRepository extends JpaRepository<Course,Long> {
+    List<Course> findByAuthor(String author);
+}
+```
+We defined a method to find Course by author name.
+
+```java
+System.out.println("Courses by author :");
+System.out.println(repository.findByAuthor("ABC"));
+```
+
+**Output** :
+```bash
+Courses by author :
+[Course [ id = 3, name = Apache kafka, author = ABC ]]
+```
