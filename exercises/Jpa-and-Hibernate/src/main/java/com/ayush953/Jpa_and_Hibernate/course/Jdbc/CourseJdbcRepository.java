@@ -1,5 +1,6 @@
 package com.ayush953.Jpa_and_Hibernate.course.Jdbc;
 
+import com.ayush953.Jpa_and_Hibernate.course.Course;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +13,10 @@ public class CourseJdbcRepository {
     }
 
     private static String INSERT_QUERY = """
-            INSERT INTO COURSE(id,name,author) VALUES (1,'Learn Spring boot','xyz');
+            INSERT INTO COURSE(id,name,author) VALUES (?,?,?);
             """;
 
-    public void insert() {
-        jdbcTemplate.update(INSERT_QUERY);
+    public void insert(Course course) {
+        jdbcTemplate.update(INSERT_QUERY,course.getId(),course.getName(),course.getAuthor());
     }
 }
