@@ -7,3 +7,12 @@ In this project we will be learning JPA and Hibernate.
 3. Use Spring JDBC to play with Course table
 4. Use JPA and Hibernate to play with Course table
 5. Use Spring Data JPA to play with Course table
+
+### 1 
+**application.properties**
+```properties
+spring.application.name=Jpa-and-Hibernate
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:testdb
+```
+it will enable h2 console in browser, and we are creating a database named testdb.
