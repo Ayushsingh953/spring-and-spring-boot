@@ -4,9 +4,9 @@ In this project we will be learning JPA and Hibernate.
 ### Approach :
 1. Create a Spring boot project with H2(in memory database).
 2. Create course table
-3. Use Spring JDBC to play with com.ayush953.Jpa_and_Hibernate.course.Course table
-4. Use JPA and Hibernate to play with com.ayush953.Jpa_and_Hibernate.course.Course table
-5. Use Spring Data JPA to play with com.ayush953.Jpa_and_Hibernate.course.Course table
+3. Use Spring JDBC to play with course table
+4. Use JPA and Hibernate to play with course table
+5. Use Spring Data JPA to play with course table
 
 ### 1 
 **application.properties**
@@ -212,6 +212,83 @@ System.out.println(repository.selectById(2));
 System.out.println(repository.selectById(3));
 ```
 **Output** :
+```bash
+Course [ id = 2, name = Spring boot, author = XYZ ]
+Course [ id = 3, name = Apache kafka, author = XYZ ]
+```
+
+### 4
+we are going to implement the above functionalities using JPA. First we need to map our Course class to the course table in tha database.
+
+**Course** Class :
+```java
+@Entity
+public class Course {
+    @Id
+    private long id;
+    
+    @Column(name="name")
+    private String name;
+    
+    @Column(name="author")
+    private String author;
+
+    public Course() {
+
+    }
+    //.....
+}
+```
+Rest of the Code will be same. 
+**@Entity** - This annotation indicates that instances of this class will be mapped to a corresponding table in the database. If we want to map to different table then we can pass the name as **@Entity(name="")** .
+**@Id** - This annotation marks the field id as the primary key of the entity.
+
+We can remove the @Column annotation if the names are same in the class as well as in the table.
+
+#### Let's perform insert , select and delete operation using JPA
+**CourseJpaRepository.java** class :
+```java
+package com.ayush953.Jpa_and_Hibernate.course.Jpa;
+
+import com.ayush953.Jpa_and_Hibernate.course.Course;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class CourseJpaRepository {
+    @PersistenceContext
+    EntityManager entityManager;
+
+    public void insert(Course course) {
+        entityManager.merge(course);
+    }
+
+    public Course selectById(long id) {
+        return entityManager.find(Course.class, id);
+    }
+
+    public void deleteById(long id) {
+        Course course = entityManager.find(Course.class, id);
+        entityManager.remove(course);
+    }
+}
+```
+**@Transactional** - This annotation indicates that the methods in this class should be executed within a transaction. It ensures that the database operations performed in these methods are atomic, meaning that either all operations succeed or none do.
+
+We are using EntityManager to create and remove persistent entity instances, to find entities by their primary key, and to query over entities.
+
+At last let's use Course JPA repository in command line runner :
+```java
+    CourseJpaRepository repository;
+    public CourseCommandLineRunner(CourseJpaRepository repository) {
+        this.repository = repository;
+    }
+```
+
+We will get the same output as before.
 ```bash
 Course [ id = 2, name = Spring boot, author = XYZ ]
 Course [ id = 3, name = Apache kafka, author = XYZ ]

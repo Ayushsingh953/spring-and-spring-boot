@@ -1,17 +1,24 @@
 package com.ayush953.Jpa_and_Hibernate.course;
 
 import com.ayush953.Jpa_and_Hibernate.course.Jdbc.CourseJdbcRepository;
+import com.ayush953.Jpa_and_Hibernate.course.Jpa.CourseJpaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CourseCommandLineRunner implements CommandLineRunner {
 
-    CourseJdbcRepository repository;
+    //CourseJdbcRepository repository;
 
-    public CourseCommandLineRunner(CourseJdbcRepository repository) {
+    /* public CourseCommandLineRunner(CourseJdbcRepository repository) {
+        this.repository = repository;
+    } */
+
+    CourseJpaRepository repository;
+    public CourseCommandLineRunner(CourseJpaRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public void run(String... args) throws Exception {
         repository.insert(new Course(1,"Docker","XYZ"));
