@@ -3,10 +3,10 @@ In this project we will be learning JPA and Hibernate.
 
 ### Approach :
 1. Create a Spring boot project with H2(in memory database).
-2. Create Course table
-3. Use Spring JDBC to play with Course table
-4. Use JPA and Hibernate to play with Course table
-5. Use Spring Data JPA to play with Course table
+2. Create com.ayush953.Jpa_and_Hibernate.course.Course table
+3. Use Spring JDBC to play with com.ayush953.Jpa_and_Hibernate.course.Course table
+4. Use JPA and Hibernate to play with com.ayush953.Jpa_and_Hibernate.course.Course table
+5. Use Spring Data JPA to play with com.ayush953.Jpa_and_Hibernate.course.Course table
 
 ### 1 
 **application.properties**
@@ -22,7 +22,7 @@ To create table we need to create schema.sql file in resources directory.
 
 **schema.sql**
 ```sql
-CREATE TABLE Course(
+CREATE TABLE course(
     id BIGINT NOT NULL,
     name VARCHAR(255) NOT NULL ,
     author VARCHAR(255) NOT NULL
