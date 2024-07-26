@@ -29,3 +29,55 @@ CREATE TABLE Course(
 );
 ```
 When we restart the application, it will automatically pick up the sql file and create our table in h2 database.
+
+### 3
+Let's insert data in our course table using Spring JDBC.
+we will create a class to perform the operation.
+
+**CourseJDBCRepository.java**
+```java
+package com.ayush953.Jpa_and_Hibernate.course.Jdbc;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class CourseJdbcRepository {
+    private JdbcTemplate jdbcTemplate;
+
+    public CourseJdbcRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    private static String INSERT_QUERY = """
+            INSERT INTO COURSE(id,name,author) VALUES (1,'Learn Spring boot','xyz');
+            """;
+
+    public void insert() {
+        jdbcTemplate.update(INSERT_QUERY);
+    }
+}
+```
+this class uses JDBC template to perform insert query.Now we need to run this when our application starts up. We can use CommandLineRunner interface to run something when the application starts.
+
+**CourseJdbcCommandLineRunner.java**
+```java
+package com.ayush953.Jpa_and_Hibernate.course.Jdbc;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+
+    CourseJdbcRepository repository;
+
+    public CourseJdbcCommandLineRunner(CourseJdbcRepository repository) {
+        this.repository = repository;
+    }
+    @Override
+    public void run(String... args) throws Exception {
+        repository.insert();
+    }
+}
+```
