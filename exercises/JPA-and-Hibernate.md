@@ -3,7 +3,7 @@ In this project we will be learning JPA and Hibernate.
 
 ### Approach :
 1. Create a Spring boot project with H2(in memory database).
-2. Create com.ayush953.Jpa_and_Hibernate.course.Course table
+2. Create course table
 3. Use Spring JDBC to play with com.ayush953.Jpa_and_Hibernate.course.Course table
 4. Use JPA and Hibernate to play with com.ayush953.Jpa_and_Hibernate.course.Course table
 5. Use Spring Data JPA to play with com.ayush953.Jpa_and_Hibernate.course.Course table
@@ -145,4 +145,74 @@ private static String DELETE_QUERY = """
 **CourseJdbcCommandLineRunner.java** :
 ```java
 repository.deleteById(1);
+```
+### Now let's query the data :
+#### Define method to query the data 
+**CourseJdbcRepository.java**
+```java
+private static String SELECT_QUERY = """
+                SELECT * FROM COURSE WHERE id = ?;
+            """;
+public Course selectById(long id) {
+    return jdbcTemplate.queryForObject(SELECT_QUERY,new BeanPropertyRowMapper<>(Course.class) ,id);
+}
+```
+
+We are mapping the course returned from database to Course class bean. The data members of the Course class should match the column names in the table to be able to map.
+Course Class Should also implement **toString** method and setters.
+
+Modified **Course** class :
+```java
+public class Course {
+    private long id;
+    private String name;
+    private String author;
+
+    public Course() {
+
+    }
+    public Course(long id, String name, String author) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getAuthor() {
+        return author;
+    }
+
+    public String toString(){
+        return "Course [ id = "+id + ", name = " + name + ", author = " + author+" ]";
+    }
+}
+```
+Print the courses
+
+**CourseJdbcCommandLineRunner.java** :
+```java
+System.out.println(repository.selectById(2));
+System.out.println(repository.selectById(3));
+```
+**Output** :
+```bash
+Course [ id = 2, name = Spring boot, author = XYZ ]
+Course [ id = 3, name = Apache kafka, author = XYZ ]
 ```
