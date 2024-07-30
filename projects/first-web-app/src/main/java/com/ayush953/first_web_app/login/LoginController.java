@@ -13,15 +13,25 @@ public class LoginController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private AuthenticationService authenticationService;
+
+    public LoginController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
     @RequestMapping(value="/login",method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String welcome(@RequestParam String name,ModelMap map) {
+    public String welcome(@RequestParam String name,@RequestParam String password,ModelMap map) {
 
-        map.put("name",name);
-        return "welcome";
+        if(authenticationService.authenticate(name,password)) {
+            map.put("name", name);
+            return "welcome";
+        }
+        map.put("Error","Invalid Credentials");
+        return "login";
     }
 }
