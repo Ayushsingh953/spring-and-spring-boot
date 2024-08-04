@@ -6,10 +6,11 @@
     <title>Welcome</title>
 </head>
 <body>
-<h1 style="text-align: center">Welcome ${name}!</h1>
+<div class="container">
+<h1>Welcome ${name}!</h1>
 <hr>
-<h1 style="text-align: center">Your Todos :</h1>
-<table>
+<h1>Your Todos :</h1>
+<table class="table">
     <thead>
         <tr>
             <th>ID</th>
@@ -29,6 +30,7 @@
         </c:forEach>`
     </tbody>
 </table>
+</div>
 <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
 </body>
