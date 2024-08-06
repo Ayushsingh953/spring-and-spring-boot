@@ -12,6 +12,7 @@
         <hr>
         <form:form method="post" modelAttribute="todo">
             Description : <form:input type="text" path="description" required="required"/>
+            <form:errors path="description" class="text-warning" />
             <form:input type="hidden" path="id" />
             <form:input type="hidden" path="completed"/>
             <input type="submit" class="btn btn-success" />

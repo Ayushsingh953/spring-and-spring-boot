@@ -486,5 +486,31 @@ Declares the JSTL core library for standard tags such as iteration and condition
 ```
 3. Add Validations to Bean
     * Todo.java
+
+**Todo.java** :
+```java
+    @Size(min=10,message = "Enter atleast 10 characters")
+    private String description;
+```
+For now, we are validating only description field.
+We need to make some changes in TodoController class and addTodo jsp as well to handle the validation.
+
+**TodoController.java** :
+```java
+@RequestMapping(value="/add-todo", method = RequestMethod.POST)
+    public String addTodo(ModelMap map, @Valid Todo todo, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return "addTodo";
+        }
+        String username = (String)map.get("name");
+        todoService.addTodo(username,todo.getDescription(), LocalDate.now().plusYears(1),false);
+        return "redirect:list-todos";
+    }
+```
+**addTodo.jsp** :
+```html
+ <form:errors path="description" class="text-warning" />
+```
 4. Display validation Errors in the View
     * todo.jsp
