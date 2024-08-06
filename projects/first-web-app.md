@@ -493,7 +493,7 @@ Declares the JSTL core library for standard tags such as iteration and condition
     private String description;
 ```
 For now, we are validating only description field.
-We need to make some changes in TodoController class and addTodo jsp as well to handle the validation.
+We need to make some changes in TodoController class as well to handle the validation.
 
 **TodoController.java** :
 ```java
@@ -508,9 +508,10 @@ We need to make some changes in TodoController class and addTodo jsp as well to 
         return "redirect:list-todos";
     }
 ```
+4. Display validation Errors in the View
+    * addTodo.jsp
+      
 **addTodo.jsp** :
 ```html
  <form:errors path="description" class="text-warning" />
 ```
-4. Display validation Errors in the View
-    * todo.jsp
