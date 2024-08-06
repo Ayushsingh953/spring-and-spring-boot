@@ -515,3 +515,39 @@ We need to make some changes in TodoController class as well to handle the valid
 ```html
  <form:errors path="description" class="text-warning" />
 ```
+
+## Implementing Delete Todo functionality
+Let's Add the delete button for each todo:
+
+**listTodos.jsp**:
+```html
+`<c:forEach items="${todos}" var="todo">
+            <tr>
+                <td>${todo.id}</td>
+                <td>${todo.description}</td>
+                <td>${todo.targetDate}</td>
+                <td>${todo.completed}</td>
+                <td><a href="delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a></td>
+            </tr>
+</c:forEach>`
+```
+**Now Let's implement a function in TodoService to delete the particular todo using its id.**
+
+**TodoService.java** :
+```java
+public void deleteTodoById(int id){
+        todos.removeIf(todo -> todo.getId() == id);
+    }
+```
+we are using a lambda function to remove particular todo if its id matches the id which we want to delete.
+
+Create a mapping for **delete-todo** endpoint to delete the todo:
+
+**TodoController.java**:
+```java
+@RequestMapping("/delete-todo")
+public String deleteTodo(@RequestParam int id){
+    todoService.deleteTodoById(id);
+    return "redirect:list-todos";
+}
+```
