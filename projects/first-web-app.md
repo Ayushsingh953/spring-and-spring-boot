@@ -551,3 +551,41 @@ public String deleteTodo(@RequestParam int id){
     return "redirect:list-todos";
 }
 ```
+
+## Implementing Update Todo functionality
+
+Let's Add the delete button for each todo:
+
+**listTodos.jsp**:
+```html
+`<c:forEach items="${todos}" var="todo">
+            <tr>
+                <td>${todo.id}</td>
+                <td>${todo.description}</td>
+                <td>${todo.targetDate}</td>
+                <td>${todo.completed}</td>
+                <td><a href="delete-todo?id=${todo.id}" class="btn btn-danger">Delete</a></td>
+              <td><a href="update-todo?id=${todo.id}" class="btn btn-dark">Update</a></td>
+            </tr>
+</c:forEach>`
+```
+
+**Let's implement a function to find the todo by its id**:
+
+**TodoService.java** :
+```java
+public Todo findById(int id){
+        return todos.stream().filter(todo -> todo.getId() == id).findFirst().orElse(null);
+    }
+```
+Create a mapping for **update-todo** endpoint to show the page to update the todo:
+
+**TodoController.java**:
+```java
+@RequestMapping("/update-todo")
+public String showUpdateTodo(@RequestParam int id, ModelMap map){
+  Todo todo = todoService.findById(id);
+  map.put("todo",todo);
+  return "addTodo";
+}
+```

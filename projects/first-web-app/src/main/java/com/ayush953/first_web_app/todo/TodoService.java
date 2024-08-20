@@ -29,4 +29,8 @@ public class TodoService {
     public void deleteTodoById(int id){
         todos.removeIf(todo -> todo.getId() == id);
     }
+
+    public Todo findById(int id){
+        return todos.stream().filter(todo -> todo.getId() == id).findFirst().orElse(null);
+    }
 }
